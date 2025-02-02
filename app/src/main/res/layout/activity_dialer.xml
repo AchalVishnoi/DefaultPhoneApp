@@ -10,7 +10,13 @@
     tools:context=".DialerActivity">
 
     <!-- Phone Number Input -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_weight="1"
         android:id="@+id/til_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,13 +31,24 @@
         app:endIconTint="@color/primaryColor">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:layout_weight="1"
             android:id="@+id/et_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:textColor="@color/black"
             android:textSize="18sp" />
+
     </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:layout_weight="1"
+            android:id="@+id/contacts"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/icons_contacts" />
+    </LinearLayout>
+
 
     <!-- Call Button -->
     <com.google.android.material.button.MaterialButton
@@ -50,17 +67,23 @@
         app:elevation="4dp" />
 
     <!-- Recent Calls Header -->
-    <TextView
-        android:id="@+id/tv_recent_calls_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Recent Calls"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/tv_recent_calls_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Recent Calls"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp">
+
+        </TextView>
+
+
+
 
     <!-- Recent Calls List -->
     <androidx.recyclerview.widget.RecyclerView

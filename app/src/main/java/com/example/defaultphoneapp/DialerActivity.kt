@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import android.Manifest
+import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 
 class DialerActivity : Activity() {
@@ -35,11 +36,12 @@ class DialerActivity : Activity() {
     private lateinit var telecomManager: TelecomManager
     private lateinit var phoneAccountHandle: PhoneAccountHandle
     private lateinit var rvRecentCalls: RecyclerView
+    private lateinit var contactbtn: ImageView
 
     private val REQUEST_CODE_CALL_LOG = 1001
 
 
-    @SuppressLint("NewApi")
+    @SuppressLint("NewApi", "MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +49,16 @@ class DialerActivity : Activity() {
 
         requestCallLogPermission()
 
+        val num = intent.getStringExtra("phone_number") ?: ""
+
+
         etPhoneNumber = findViewById(R.id.et_phone_number)
         btnCall = findViewById(R.id.btn_call)
 
+        etPhoneNumber.setText(num)
+
         rvRecentCalls = findViewById(R.id.rv_recent_calls)
+        contactbtn=findViewById(R.id.contacts)
 
         rvRecentCalls.layoutManager = LinearLayoutManager(this)
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG)
@@ -88,6 +96,12 @@ class DialerActivity : Activity() {
             else {
                 Toast.makeText(this, "Enter a valid phone number", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        contactbtn.setOnClickListener{
+            val intent = Intent(this, ContactsActivity::class.java)
+
+            startActivity(intent)
         }
 
         registerPhoneAccount()

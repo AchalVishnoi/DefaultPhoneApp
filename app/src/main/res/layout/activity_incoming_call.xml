@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- activity_incoming_call.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp"
-    android:background="@color/white"
-    tools:context=".IncomingCallActivity">
+    android:padding="16dp">
 
     <!-- Caller Info -->
     <TextView
@@ -18,39 +14,22 @@
         android:layout_height="wrap_content"
         android:text="Incoming Call"
         android:textSize="24sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
+        />
 
     <!-- Accept Button -->
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btn_accept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Accept"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:drawableStart="@drawable/baseline_call_24"
-        android:drawablePadding="8dp"
-        app:iconTint="@color/white"
-        app:backgroundTint="@color/primaryColor"
-        app:cornerRadius="8dp"
-        app:elevation="4dp"
-        android:layout_marginBottom="16dp" />
+        android:backgroundTint="#4CAF50"/>
 
     <!-- Reject Button -->
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btn_reject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reject"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:drawableStart="@drawable/ic_call_reject"
-        android:drawablePadding="8dp"
-        app:iconTint="@color/white"
-        app:backgroundTint="#F44336"
-        app:cornerRadius="8dp"
-        app:elevation="4dp" />
+        android:backgroundTint="@color/red"/>
 
 </LinearLayout>

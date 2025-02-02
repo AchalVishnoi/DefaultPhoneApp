@@ -2,6 +2,6 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.DefaultPhoneApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <item name="colorPrimary">#1F616A</item>
+        <item name="colorPrimary">@color/primaryColor</item>
     </style>
 </resources>
