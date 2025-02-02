@@ -1,11 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- activity_ongoing_call.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/white"
+    tools:context=".OngoingCallActivity">
 
     <!-- Caller Info -->
     <TextView
@@ -13,20 +15,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ongoing Call"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
 
     <!-- End Call Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_end_call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="End Call" />
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+
+        android:textColor="@color/white"
+
+        android:drawableStart="@drawable/baseline_call_24"
+        app:icon="@drawable/baseline_call_24"
+        app:iconSize="30dp"
+
+        app:iconTint="@color/white"
+        app:backgroundTint="@color/red"
+        app:cornerRadius="35dp"
+        app:elevation="4dp"
+        android:layout_marginBottom="16dp" />
 
     <!-- Hold Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_hold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hold" />
+        android:text="Hold"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+
+        android:drawablePadding="8dp"
+        app:iconTint="@color/white"
+        app:backgroundTint="@color/darker_gray"
+        app:cornerRadius="8dp"
+        app:elevation="4dp" />
 
 </LinearLayout>

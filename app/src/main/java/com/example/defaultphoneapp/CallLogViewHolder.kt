@@ -10,11 +10,14 @@ class CallLogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val tvType: TextView = itemView.findViewById(R.id.tv_type)
     private val tvDate: TextView = itemView.findViewById(R.id.tv_date)
     private val tvDuration: TextView = itemView.findViewById(R.id.tv_duration)
+    private val tvName: TextView = itemView.findViewById(R.id.tv_name)
 
     fun bind(callLog: CallLog) {
+
         tvNumber.text = callLog.number
         tvType.text = callLog.type
         tvDate.text = callLog.date
         tvDuration.text = callLog.duration
+        tvName.text=callLog.name
     }
 }

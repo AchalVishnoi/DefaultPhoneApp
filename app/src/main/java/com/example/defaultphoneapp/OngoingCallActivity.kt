@@ -1,13 +1,13 @@
 package com.example.defaultphoneapp
 
 import android.annotation.SuppressLint
-import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.telecom.Call
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
-class OngoingCallActivity : Activity() {
+class OngoingCallActivity : AppCompatActivity() {
 
     private lateinit var tvCallerInfo: TextView
     private lateinit var btnEndCall: Button
@@ -22,17 +22,22 @@ class OngoingCallActivity : Activity() {
         btnEndCall = findViewById(R.id.btn_end_call)
         btnHold = findViewById(R.id.btn_hold)
 
+
+
         val callerNumber = intent.getStringExtra("CALLER_NUMBER")
         tvCallerInfo.text = "Call with: $callerNumber"
 
         btnEndCall.setOnClickListener {
-            // End the call
+
             MyInCallService.currentCall?.disconnect()
+
+            val intent = Intent(this, DialerActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
         btnHold.setOnClickListener {
-            // Put the call on hold
+
             MyInCallService.currentCall?.hold()
         }
     }

@@ -1,41 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- item_call_log.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/bg_call_log_item"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    tools:context=".CallLogsActivity">
 
-    <!-- Phone Number -->
+    <!-- Name -->
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Number -->
     <TextView
         android:id="@+id/tv_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Number"
-        android:textSize="18sp" />
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="8dp" />
 
-    <!-- Call Type -->
-    <TextView
-        android:id="@+id/tv_type"
-        android:layout_width="wrap_content"
+    <!-- Call Type, Date, and Duration -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Type"
-        android:textColor="@android:color/darker_gray" />
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp">
 
-    <!-- Call Date -->
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:textColor="@android:color/darker_gray" />
+        <!-- Call Type -->
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textSize="14sp"
+            android:textColor="@color/darker_gray"
 
-    <!-- Call Duration -->
-    <TextView
-        android:id="@+id/tv_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Duration"
-        android:textColor="@android:color/darker_gray" />
+            android:drawablePadding="4dp"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Call Date -->
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="14sp"
+            android:textColor="@color/darker_gray"
+
+            android:drawablePadding="4dp"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Call Duration -->
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duration"
+            android:textSize="14sp"
+            android:textColor="@color/darker_gray"
+
+            android:drawablePadding="4dp" />
+    </LinearLayout>
 
 </LinearLayout>

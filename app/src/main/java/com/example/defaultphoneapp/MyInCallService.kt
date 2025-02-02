@@ -1,4 +1,6 @@
+package com.example.defaultphoneapp
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -7,10 +9,12 @@ import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.provider.ContactsContract
 import android.telecom.Call
 import android.telecom.InCallService
 import androidx.core.app.NotificationCompat
 import com.example.defaultphoneapp.IncomingCallActivity
+
 
 class MyInCallService : InCallService() {
 
@@ -25,12 +29,12 @@ class MyInCallService : InCallService() {
 
         if (call.state == Call.STATE_RINGING) {
             showIncomingCallNotification(call)
-            launchIncomingCallActivity(call)
+
         }
     }
 
     override fun onCallRemoved(call: Call) {
-        // Handle call removal
+
         currentCall = null
         call.unregisterCallback(callCallback)
     }
@@ -40,17 +44,17 @@ class MyInCallService : InCallService() {
             // Handle call state changes
             when (state) {
                 Call.STATE_ACTIVE -> {
-                    // Call is active
+
                 }
                 Call.STATE_DISCONNECTED -> {
-                    // Call ended
+
                 }
             }
         }
     }
 
     private fun showIncomingCallNotification(call: Call) {
-        // Create a notification channel for incoming calls
+
         val channelId = "incoming_calls"
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
@@ -73,7 +77,7 @@ class MyInCallService : InCallService() {
         // Create an intent to launch the IncomingCallActivity
         val intent = Intent(this, IncomingCallActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            putExtra("CALLER_NUMBER", call.details.handle?.schemeSpecificPart)
+            putExtra("CALLER_NUMBER", getContactName(call.details.handle?.schemeSpecificPart.toString())?:call.details.handle?.schemeSpecificPart)
         }
         val pendingIntent = PendingIntent.getActivity(
             this,
@@ -85,8 +89,8 @@ class MyInCallService : InCallService() {
         // Build the notification
         val notification = NotificationCompat.Builder(this, channelId)
             .setContentTitle("Incoming Call")
-            .setContentText("Call from: ${call.details.handle?.schemeSpecificPart}")
-            .setSmallIcon(R.drawable.ic_call)
+            .setContentText("Call from: ${getContactName(call.details.handle?.schemeSpecificPart.toString())?:call.details.handle?.schemeSpecificPart}")
+            .setSmallIcon(R.drawable.baseline_call_24)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setFullScreenIntent(pendingIntent, true)
             .setOngoing(true)
@@ -99,8 +103,24 @@ class MyInCallService : InCallService() {
     private fun launchIncomingCallActivity(call: Call) {
         val intent = Intent(this, IncomingCallActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            putExtra("CALLER_NUMBER", call.details.handle?.schemeSpecificPart)
+            putExtra("CALLER_NUMBER", getContactName(call.details.handle?.schemeSpecificPart.toString())?:call.details.handle?.schemeSpecificPart)
         }
         startActivity(intent)
     }
+
+    @SuppressLint("Range")
+    private fun getContactName(phoneNumber: String): String? {
+        val uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
+        val projection = arrayOf(ContactsContract.PhoneLookup.DISPLAY_NAME)
+
+        var name: String? = null
+        contentResolver.query(uri, projection, null, null, null)?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                name = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME))
+            }
+        }
+        return name
+    }
+
+
 }

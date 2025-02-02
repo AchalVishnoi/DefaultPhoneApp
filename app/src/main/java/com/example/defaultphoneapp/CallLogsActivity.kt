@@ -1,9 +1,12 @@
 package com.example.defaultphoneapp
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.provider.CallLog
+import android.provider.ContactsContract
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
@@ -56,15 +59,32 @@ class CallLogsActivity : Activity() {
                 val date = it.getLong(dateIndex)
                 val duration = it.getString(durationIndex)
 
-                // Format the date
+
                 val formattedDate = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
                     .format(Date(date))
 
-                // Add to the list
-                callLogs.add(CallLog(number, type, formattedDate, duration))
+                val name = getContactName(number) ?: "Unknown"
+
+
+                callLogs.add(CallLog(name,number, type, formattedDate, duration))
             }
         }
 
         return callLogs
+    }
+
+
+    @SuppressLint("Range")
+    private fun getContactName(phoneNumber: String): String? {
+        val uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
+        val projection = arrayOf(ContactsContract.PhoneLookup.DISPLAY_NAME)
+
+        var name: String? = null
+        contentResolver.query(uri, projection, null, null, null)?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                name = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME))
+            }
+        }
+        return name
     }
 }

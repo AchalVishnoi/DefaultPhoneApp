@@ -1,31 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- activity_dialer.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/white"
+    tools:context=".DialerActivity">
 
     <!-- Phone Number Input -->
-    <EditText
-        android:id="@+id/et_phone_number"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter phone number"
-        android:inputType="phone" />
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxStrokeColor="@color/primaryColor"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/primaryColor">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Call Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_call"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Call" />
+        android:layout_marginTop="24dp"
+        android:text="Call"
+        android:textColor="@color/white"
+        android:textSize="18sp"
 
-    <!-- Recent Calls (Optional) -->
+        android:drawablePadding="8dp"
+        app:iconTint="@color/white"
+        app:backgroundTint="@color/primaryColor"
+        app:cornerRadius="8dp"
+        app:elevation="4dp" />
+
+    <!-- Recent Calls Header -->
+    <TextView
+        android:id="@+id/tv_recent_calls_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Recent Calls"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp" />
+
+    <!-- Recent Calls List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recent_calls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:background="@drawable/bg_recycler_view"
+        android:clipToPadding="false"
+        tools:listitem="@layout/item_call_log" />
 
 </LinearLayout>
